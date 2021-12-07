@@ -48,7 +48,7 @@ age_plot = px.histogram(data_frame=df_police,
 age_plot.update_layout(bargap=0.1, 
                        title={'text': 'Age Ranges', 'y': 0.9, 'x': 0.5, 
                               'xanchor': 'center', 'yanchor': 'top'},
-                       xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=100, step=5), 'ticktext':np.arange(start=0, stop=100, step=5)})
+                       xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=120, step=5), 'ticktext':np.arange(start=0, stop=100, step=5)})
 
 percentage_plot = px.bar(data_frame=df_percentage, x='state', y='percentage',
                         labels={'state':'States', 'percentage':'Number of Shootings per 10,000'},
