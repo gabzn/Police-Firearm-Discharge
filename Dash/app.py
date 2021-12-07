@@ -72,6 +72,14 @@ weapon_plot = px.bar(data_frame=df_weapon,
 weapon_plot.update_layout(bargap=0.1, title={'text': 'Most Common Weapons Found', 'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'})
 
+scatter_map_plot = px.scatter_mapbox(df_population, 
+                                     lat=df_population['lat'], 
+                                     lon=df_population['long'], 
+                                     hover_name=df_population['state'],
+                                     mapbox_style='carto-positron',
+                                     width=1000, height=500,
+                                     center={'lat':39.048191, 'lon':-95.677956},
+                                     zoom=3)
 
 # Layout starts here
 app.layout = dbc.Container(children=[
@@ -109,7 +117,15 @@ app.layout = dbc.Container(children=[
             id='weapon_plot',
             figure=weapon_plot
         )
-    ], className='weapon_plot_container')
+    ], className='weapon_plot_container'),
+
+
+    dbc.Container(children=[
+        dcc.Graph(
+            id='scatter_map_plot',
+            figure=scatter_map_plot
+        )
+    ], className='scatter_map_plot_container')
 
 ], className='main_container')
 
