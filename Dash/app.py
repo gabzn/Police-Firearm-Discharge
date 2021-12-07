@@ -2,9 +2,11 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
+import numpy as np
 import dash_bootstrap_components as dbc
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
+app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
+                                                                           'content': 'width=device-width, initial-scale=1.0'}])
 
 # Read in all the dataframes
 df_police = pd.read_csv('../Datasets/police.csv')
@@ -43,8 +45,10 @@ age_plot = px.histogram(data_frame=df_police,
                         nbins=40, 
                         labels={'age':'Age'})
                         # color_discrete_sequence=px.colors.qualitative.Bold)
-age_plot.update_layout(bargap=0.1, title={'text': 'Age Ranges', 'y': 0.9, 'x': 0.5, 
-                                          'xanchor': 'center', 'yanchor': 'top'})
+age_plot.update_layout(bargap=0.1, 
+                       title={'text': 'Age Ranges', 'y': 0.9, 'x': 0.5, 
+                              'xanchor': 'center', 'yanchor': 'top'},
+                       xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=100, step=5), 'ticktext':np.arange(start=0, stop=100, step=5)})
 
 percentage_plot = px.bar(data_frame=df_percentage, x='state', y='percentage',
                         labels={'state':'States', 'percentage':'Number of Shootings per 10,000'},
@@ -57,7 +61,7 @@ percentage_plot.update_layout(bargap=0.1, title={'text': 'Shootings per 10,000 P
 
 race_plot = px.pie(data_frame=race_series, names='race', values='percentage', color='race')
 race_plot.update_layout(bargap=0.1, title={'text': 'Race-Shot Percentages Based on 9000 Victims', 
-                                          'y': 1, 'x': 0.5, 
+                                          'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'}) 
 
@@ -70,34 +74,37 @@ weapon_plot.update_layout(bargap=0.1, title={'text': 'Most Common Weapons Found'
 
 
 # Layout starts here
-app.layout = html.Div(children=[
+app.layout = dbc.Container(children=[
 
     dbc.Row(
-        dbc.Col(html.H1('Police Firearm Discharge', className='text-center'))
+        dbc.Col(html.H1('Police Firearm Discharge', className='text-center bg-dark text-white'))
     ),
 
-    html.Div(children=[
-        dcc.Graph(
-            id='age_plot',
-            figure=age_plot
-        ),
-    ], className='age_plot_container'),
-  
-    html.Div(children=[
-        dcc.Graph(
-            id='race_plot',
-            figure=race_plot
-        ),
-    ], className='race_plot_container'),
+    dbc.Row(children=[
+        dbc.Col([
+            dcc.Graph(id='age_plot',figure=age_plot), 
+        ], width={'size':'6'}),
 
-    html.Div(children=[
+        dbc.Col([
+            dcc.Graph(id='race_plot',figure=race_plot),
+        ], width={'size':'6'})
+    ], className='age_and_race_row'),
+  
+    # dbc.Container(children=[
+    #     dcc.Graph(
+    #         id='race_plot',
+    #         figure=race_plot
+    #     ),
+    # ], className='race_plot_container'),
+
+    dbc.Container(children=[
         dcc.Graph(
             id='percentage_plot',
             figure=percentage_plot
         )
     ], className='percentage_plot_container'),
 
-    html.Div(children=[
+    dbc.Container(children=[
         dcc.Graph(
             id='weapon_plot',
             figure=weapon_plot
