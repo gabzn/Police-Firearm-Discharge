@@ -113,31 +113,31 @@ app.layout = dbc.Container([
         dbc.Col([
             dcc.Graph(id='race_local_plot',figure=race_local_plot),
         ], width={'size':'6'})
-    ], className='age_and_race_row pb-4 shadow-sm'),
+    ], className='age_and_race_row pb-3'),
   
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='percentage_plot', figure=percentage_plot)
         ])
-    ], className='percentage_plot_row'),
+    ], className='percentage_plot_row pb-3'),
 
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='weapon_plot', figure=weapon_plot)
         ])
-    ], className='weapon_plot_row'),
+    ], className='weapon_plot_row pb-3'),
 
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='scatter_map_plot', figure=scatter_map_plot)
         ])
-    ], className='scatter_map_plot_row'),
+    ], className='scatter_map_plot_row pb-3'),
 
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='race_global_plot', figure=race_global_plot)
         ])
-    ], className='race_global_plot_row'),
+    ], className='race_global_plot_row pb-3'),
 
 ], className='container-fliud')
 
