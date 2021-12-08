@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Murecho&family=Source+Sans+3:ital,wght@1,400&display=swap');
+
 body {
     background-color:rgba(90, 94, 98, 0.986);
+    font-family: 'Source Sans 3', sans-serif;
 } 
 
 #_dash-app-content > div > div:nth-child(1) > div > h1 {
