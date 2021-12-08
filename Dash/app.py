@@ -13,6 +13,7 @@ df_police = pd.read_csv('../Datasets/police.csv')
 df_population = pd.read_csv('../Datasets/population.csv')
 df_race = pd.read_csv('../Datasets/race.csv')
 
+
 population_dict = {}
 for city, num in zip(df_population['abbreviation'], df_population['population'] / 10000):
     population_dict[city] = num
@@ -26,8 +27,8 @@ for city in population_dict:
 
 for state in df_population['state']:
     percentage_dict['state_name'].append(state)
-
 df_percentage = pd.DataFrame.from_dict(percentage_dict)
+
 
 weapon_dict = {
     'weapon':['gun', 'knife', 'toy gun', 'baseball bat', 'hammer', 'ax', 'crossbow'],
@@ -35,9 +36,19 @@ weapon_dict = {
 }
 df_weapon = pd.DataFrame.from_dict(weapon_dict)
 
-race_series = round((df_police['race'].value_counts().sort_values() / 9096) * 100, 2)
-race_series = race_series.reset_index()
-race_series.rename(columns={'index': 'race', 'race': 'percentage'}, inplace=True)
+
+df_race_percentage_local = round((df_police['race'].value_counts().sort_values() / 9096) * 100, 2)
+df_race_percentage_local = df_race_percentage_local.reset_index()
+df_race_percentage_local.rename(columns={'index': 'race', 'race': 'percentage'}, inplace=True)
+
+
+df_race_percentage_global = {'race': [], 'percentage': []}
+for race, num_of_shooting in df_police['race'].value_counts().sort_values().iteritems():
+    percentage_global = (num_of_shooting / (df_race.loc[df_race['race'] == race, 'population'].item())) * 100
+    df_race_percentage_global['race'].append(race)
+    df_race_percentage_global['percentage'].append(percentage_global)
+df_race_percentage_global = pd.DataFrame.from_dict(df_race_percentage_global)
+
 
 # Create all the graphs 
 age_plot = px.histogram(data_frame=df_police, 
@@ -59,8 +70,14 @@ percentage_plot.update_layout(bargap=0.1, title={'text': 'Shootings per 10,000 P
                                           'xanchor': 'center', 
                                           'yanchor': 'top'})                        
 
-race_plot = px.pie(data_frame=race_series, names='race', values='percentage', color='race')
-race_plot.update_layout(bargap=0.1, title={'text': 'Race-Shot Percentages Based on 9000 Victims', 
+race_local_plot = px.pie(data_frame=df_race_percentage_local, names='race', values='percentage', color='race')
+race_local_plot.update_layout(bargap=0.1, title={'text': 'Race Percentages Based on 9000+ Victims', 
+                                          'y': 0.9, 'x': 0.5, 
+                                          'xanchor': 'center', 
+                                          'yanchor': 'top'}) 
+
+race_global_plot = px.pie(data_frame=df_race_percentage_global, names='race', values='percentage', color='race')
+race_global_plot.update_layout(bargap=0.1, title={'text': 'Race Percentages Based on Population of Each Race', 
                                           'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'}) 
@@ -73,59 +90,54 @@ weapon_plot.update_layout(bargap=0.1, title={'text': 'Most Common Weapons Found'
                                           'xanchor': 'center', 'yanchor': 'top'})
 
 scatter_map_plot = px.scatter_mapbox(df_population, 
-                                     lat=df_population['lat'], 
-                                     lon=df_population['long'], 
-                                     hover_name=df_population['state'],
+                                     lat='lat', 
+                                     lon='long', 
+                                     hover_name='state',
                                      mapbox_style='carto-positron',
-                                     width=1000, height=500,
+                                    #  width=1000, height=500,
                                      center={'lat':39.048191, 'lon':-95.677956},
                                      zoom=3)
 
 # Layout starts here
-app.layout = dbc.Container(children=[
+app.layout = dbc.Container([
 
     dbc.Row(
         dbc.Col(html.H1('Police Firearm Discharge', className='text-center bg-dark text-white'))
     ),
 
-    dbc.Row(children=[
+    dbc.Row([
         dbc.Col([
             dcc.Graph(id='age_plot',figure=age_plot), 
         ], width={'size':'6'}),
 
         dbc.Col([
-            dcc.Graph(id='race_plot',figure=race_plot),
+            dcc.Graph(id='race_local_plot',figure=race_local_plot),
         ], width={'size':'6'})
     ], className='age_and_race_row'),
   
-    # dbc.Container(children=[
-    #     dcc.Graph(
-    #         id='race_plot',
-    #         figure=race_plot
-    #     ),
-    # ], className='race_plot_container'),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='percentage_plot', figure=percentage_plot)
+        ])
+    ], className='percentage_plot_row'),
 
-    dbc.Container(children=[
-        dcc.Graph(
-            id='percentage_plot',
-            figure=percentage_plot
-        )
-    ], className='percentage_plot_container'),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='weapon_plot', figure=weapon_plot)
+        ])
+    ], className='weapon_plot_row'),
 
-    dbc.Container(children=[
-        dcc.Graph(
-            id='weapon_plot',
-            figure=weapon_plot
-        )
-    ], className='weapon_plot_container'),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='scatter_map_plot', figure=scatter_map_plot)
+        ])
+    ], className='scatter_map_plot_row'),
 
-
-    dbc.Container(children=[
-        dcc.Graph(
-            id='scatter_map_plot',
-            figure=scatter_map_plot
-        )
-    ], className='scatter_map_plot_container')
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='race_global_plot', figure=race_global_plot)
+        ])
+    ], className='race_global_plot_row'),
 
 ], className='main_container')
 
