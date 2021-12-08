@@ -1,3 +1,7 @@
 body {
-    background-color:rgb(125, 134, 143)
+    background-color:rgba(90, 94, 98, 0.986);
+} 
+
+#_dash-app-content > div > div:nth-child(1) > div > h1 {
+    background-color: rgba(51, 51, 58, 0.397)
 } 

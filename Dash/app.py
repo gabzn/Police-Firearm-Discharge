@@ -102,9 +102,9 @@ scatter_map_plot = px.scatter_mapbox(df_population,
 app.layout = dbc.Container([
 
     dbc.Row(
-        dbc.Col(html.H1('Police Firearm Discharge', className='text-center bg-dark text-white'))
+        dbc.Col(html.H1('Police Firearm Discharge', className='text-center text-white'))
     ),
-
+    
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='age_plot',figure=age_plot), 
@@ -113,7 +113,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dcc.Graph(id='race_local_plot',figure=race_local_plot),
         ], width={'size':'6'})
-    ], className='age_and_race_row'),
+    ], className='age_and_race_row pb-4 shadow-sm'),
   
     dbc.Row([
         dbc.Col([
@@ -139,7 +139,7 @@ app.layout = dbc.Container([
         ])
     ], className='race_global_plot_row'),
 
-], className='main_container')
+], className='container-fliud')
 
 
 
