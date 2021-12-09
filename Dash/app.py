@@ -74,16 +74,15 @@ app.layout = dbc.Container([
   
     dbc.Row([
         dbc.Col([
-            dcc.Graph(id='state_percentage_plot', figure=state_percentage_plot)
-        ])
-    ], className='state_percentage_plot_row pb-3'),
-    
-    dbc.Row([
-        dbc.Col([
-            dcc.Graph(id='state_total_plot', figure=state_total_plot)
-        ])
-    ], className='state_total_plot_row pb-3'),
-    
+            dcc.Tabs(id="state_plots", value='View Percentages in Each State', children=[
+                dcc.Tab(label='View Percentages in Each State', value='View Percentages in Each State'),
+                dcc.Tab(label='View Total in Each State', value='View Total in Each State'),
+            ]),
+
+            dcc.Graph(id='state_plot', figure={})
+        ]),
+    ], className='state_tabs_row pb-3'),
+
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='race_local_plot',figure=race_local_plot),
@@ -105,26 +104,13 @@ app.layout = dbc.Container([
 
 ], className='container-fliud')
 
-
-@app.callback(
-    [Output(component_id='', component_property=''),
-     Output(component_id='', component_property='')],
-    [Input(component_id='', component_property=''),
-     Input(component_id='', component_property='')],
-    prevent_initial_call=True
-)
-def update_my_graph(value):
-    pass
-
-
-
-
-
-
-
-
-
-
+@app.callback(Output('state_plot', 'figure'),
+              Input('state_plots', 'value'))
+def render_state_plot(tab):
+    if tab == 'View Percentages in Each State':
+        return state_percentage_plot
+    elif tab == 'View Total in Each State':
+        return state_total_plot
 
 
 
