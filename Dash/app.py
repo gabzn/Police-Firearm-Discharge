@@ -68,11 +68,20 @@ app.layout = dbc.Container([
         ], width={'size':'6'}),
 
         dbc.Col([
-            # dcc.Graph(id='race_local_plot',figure=race_local_plot),
             dcc.Graph(id='weapon_plot', figure=weapon_plot)
         ], width={'size':'6'})
     ], className='age_and_weapon_row pb-3'),
   
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(figure=race_local_plot), 
+        ], width={'size':'6'}),
+
+        dbc.Col([
+            dcc.Graph(figure=race_global_plot)
+        ], width={'size':'6'})
+    ], className='race_pie_plots_row pb-3'),
+
     dbc.Row([
         dbc.Col([
             dcc.Tabs(id="state_plots", value='View Total in Each State', children=[
@@ -84,16 +93,16 @@ app.layout = dbc.Container([
         ]),
     ], className='state_tabs_row pb-3'),
 
-    dbc.Row([
-        dbc.Col([
-            dcc.Tabs(id="race_pie_plots", value='View Race Percentages in Our Dataset', children=[
-                dcc.Tab(label='View Race Percentages in Our Dataset', value='View Race Percentages in Our Dataset'),
-                dcc.Tab(label='View Race Percentages in The Total Population', value='View Race Percentages in The Total Population'),
-            ]),
+    # dbc.Row([
+    #     dbc.Col([
+    #         dcc.Tabs(id="race_pie_plots", value='View Race Percentages in Our Dataset', children=[
+    #             dcc.Tab(label='View Race Percentages in Our Dataset', value='View Race Percentages in Our Dataset'),
+    #             dcc.Tab(label='View Race Percentages in The Total Population', value='View Race Percentages in The Total Population'),
+    #         ]),
 
-            dcc.Graph(id='race_pie_plot', figure={})
-        ]),
-    ], className='race_tabs_row pb-3'),
+    #         dcc.Graph(id='race_pie_plot', figure={})
+    #     ]),
+    # ], className='race_tabs_row pb-3'),
 
     dbc.Row([
         dbc.Col([
@@ -113,13 +122,13 @@ def render_state_plot(tab):
         return state_total_plot
 
 
-@app.callback(Output('race_pie_plot', 'figure'),
-              Input('race_pie_plots', 'value'))
-def render_state_plot(tab):
-    if tab == 'View Race Percentages in Our Dataset':
-        return race_local_plot
-    elif tab == 'View Race Percentages in The Total Population':
-        return race_global_plot
+# @app.callback(Output('race_pie_plot', 'figure'),
+#               Input('race_pie_plots', 'value'))
+# def render_state_plot(tab):
+#     if tab == 'View Race Percentages in Our Dataset':
+#         return race_local_plot
+#     elif tab == 'View Race Percentages in The Total Population':
+#         return race_global_plot
 
 
 if __name__ == '__main__':
