@@ -19,41 +19,6 @@ df_police = pd.read_csv('../Datasets/police.csv')
 df_population = pd.read_csv('../Datasets/population.csv')
 df_race = pd.read_csv('../Datasets/race.csv')
 
-# population_dict = {}
-# for city, num in zip(df_population['abbreviation'], df_population['population'] / 10000):
-#     population_dict[city] = num
-
-# percentage_dict = {'state': [], 'percentage': [], 'state_name': []}
-# for city in population_dict:
-#     percentage = df_police['state'].value_counts()[city] / population_dict[city] * 100
-#     percentage = round(percentage)
-#     percentage_dict['state'].append(city)
-#     percentage_dict['percentage'].append(percentage)
-
-# for state in df_population['state']:
-#     percentage_dict['state_name'].append(state)
-# df_percentage = pd.DataFrame.from_dict(percentage_dict)
-
-
-# weapon_dict = {
-#     'weapon':['gun', 'knife', 'toy gun', 'baseball bat', 'hammer', 'ax', 'crossbow'],
-#     'count': [4847, 1193, 268, 431, 604, 242, 101]
-# }
-# df_weapon = pd.DataFrame.from_dict(weapon_dict)
-
-
-# df_race_percentage_local = round((df_police['race'].value_counts().sort_values() / 9096) * 100, 2)
-# df_race_percentage_local = df_race_percentage_local.reset_index()
-# df_race_percentage_local.rename(columns={'index': 'race', 'race': 'percentage'}, inplace=True)
-
-# df_race_percentage_global = {'race': [], 'percentage': []}
-# for race, num_of_shooting in df_police['race'].value_counts().sort_values().iteritems():
-#     percentage_global = (num_of_shooting / (df_race.loc[df_race['race'] == race, 'population'].item())) * 100
-#     df_race_percentage_global['race'].append(race)
-#     df_race_percentage_global['percentage'].append(percentage_global)
-# df_race_percentage_global = pd.DataFrame.from_dict(df_race_percentage_global)
-
-
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
                        title={'text': 'Age Ranges', 'y': 0.9, 'x': 0.5, 
@@ -77,7 +42,6 @@ race_global_plot.update_layout(bargap=0.1, title={'text': 'Race Percentages Base
 
 weapon_plot.update_layout(bargap=0.1, title={'text': 'Most Common Weapons Found', 'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'})
-
 
 
 # Layout starts here
