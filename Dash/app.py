@@ -23,7 +23,10 @@ df_race = pd.read_csv('../Datasets/race.csv')
 age_plot.update_layout(bargap=0.2, 
                        title={'text': 'Age Ranges', 'y': 0.9, 'x': 0.5, 
                               'xanchor': 'center', 'yanchor': 'top'},
-                       xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=120, step=5), 'ticktext':np.arange(start=0, stop=100, step=5)})
+                       xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=120, step=5), 
+                              'ticktext':np.arange(start=0, stop=100, step=5),
+                              'title': 'Age'},
+                       yaxis={'title': 'Count'})
 
 weapon_plot.update_layout(bargap=0.2, title={'text': 'Most Common Weapons Found', 'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'},
@@ -52,8 +55,6 @@ race_global_plot.update_layout(title={'text': 'Race Percentages Based on Populat
                                           'yanchor': 'top'}) 
 
 
-
-
 # Layout starts here
 app.layout = dbc.Container([
 
@@ -74,26 +75,38 @@ app.layout = dbc.Container([
   
     dbc.Row([
         dbc.Col([
-            dcc.Tabs(id="state_plots", value='View Percentages in Each State', children=[
-                dcc.Tab(label='View Percentages in Each State', value='View Percentages in Each State'),
+            dcc.Tabs(id="state_plots", value='View Total in Each State', children=[
                 dcc.Tab(label='View Total in Each State', value='View Total in Each State'),
+                dcc.Tab(label='View Percentages in Each State', value='View Percentages in Each State'),
             ]),
 
             dcc.Graph(id='state_plot', figure={})
         ]),
     ], className='state_tabs_row pb-3'),
 
-    dbc.Row([
-        dbc.Col([
-            dcc.Graph(id='race_local_plot',figure=race_local_plot),
-        ])
-    ], className='race_local_plot_row pb-3'),
 
     dbc.Row([
         dbc.Col([
-            dcc.Graph(id='race_global_plot', figure=race_global_plot)
-        ])
-    ], className='race_global_plot_row pb-3'),
+            dcc.Tabs(id="race_pie_plots", value='View Race Percentages in Our Dataset', children=[
+                dcc.Tab(label='View Race Percentages in Our Dataset', value='View Race Percentages in Our Dataset'),
+                dcc.Tab(label='View Race Percentages in The Total Population', value='View Race Percentages in The Total Population'),
+            ]),
+
+            dcc.Graph(id='race_pie_plot', figure={})
+        ]),
+    ], className='race_tabs_row pb-3'),
+
+    # dbc.Row([
+    #     dbc.Col([
+    #         dcc.Graph(id='race_local_plot',figure=race_local_plot),
+    #     ])
+    # ], className='race_local_plot_row pb-3'),
+
+    # dbc.Row([
+    #     dbc.Col([
+    #         dcc.Graph(id='race_global_plot', figure=race_global_plot)
+    #     ])
+    # ], className='race_global_plot_row pb-3'),
 
     dbc.Row([
         dbc.Col([
@@ -113,6 +126,13 @@ def render_state_plot(tab):
         return state_total_plot
 
 
+@app.callback(Output('race_pie_plot', 'figure'),
+              Input('race_pie_plots', 'value'))
+def render_state_plot(tab):
+    if tab == 'View Race Percentages in Our Dataset':
+        return race_local_plot
+    elif tab == 'View Race Percentages in The Total Population':
+        return race_global_plot
 
 
 if __name__ == '__main__':
