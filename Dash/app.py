@@ -84,7 +84,6 @@ app.layout = dbc.Container([
         ]),
     ], className='state_tabs_row pb-3'),
 
-
     dbc.Row([
         dbc.Col([
             dcc.Tabs(id="race_pie_plots", value='View Race Percentages in Our Dataset', children=[
@@ -95,18 +94,6 @@ app.layout = dbc.Container([
             dcc.Graph(id='race_pie_plot', figure={})
         ]),
     ], className='race_tabs_row pb-3'),
-
-    # dbc.Row([
-    #     dbc.Col([
-    #         dcc.Graph(id='race_local_plot',figure=race_local_plot),
-    #     ])
-    # ], className='race_local_plot_row pb-3'),
-
-    # dbc.Row([
-    #     dbc.Col([
-    #         dcc.Graph(id='race_global_plot', figure=race_global_plot)
-    #     ])
-    # ], className='race_global_plot_row pb-3'),
 
     dbc.Row([
         dbc.Col([
