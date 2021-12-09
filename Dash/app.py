@@ -70,7 +70,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dcc.Graph(id='weapon_plot', figure=weapon_plot)
         ], width={'size':'6'})
-    ], className='age_and_weapon_row pb-3'),
+    ], className='age_and_weapon_row pb-4'),
   
     dbc.Row([
         dbc.Col([
@@ -80,18 +80,18 @@ app.layout = dbc.Container([
         dbc.Col([
             dcc.Graph(figure=race_global_plot)
         ], width={'size':'6'})
-    ], className='race_pie_plots_row pb-3'),
+    ], className='race_pie_plots_row pb-4'),
 
     dbc.Row([
         dbc.Col([
-            dcc.Tabs(id="state_plots", value='View Total in Each State', children=[
-                dcc.Tab(label='View Total in Each State', value='View Total in Each State'),
+            dcc.Tabs(id="state_plots", value='View Percentages in Each State', children=[
                 dcc.Tab(label='View Percentages in Each State', value='View Percentages in Each State'),
+                dcc.Tab(label='View Total in Each State', value='View Total in Each State'),
             ]),
 
             dcc.Graph(id='state_plot', figure={})
         ]),
-    ], className='state_tabs_row pb-3'),
+    ], className='state_tabs_row pb-4'),
 
     # dbc.Row([
     #     dbc.Col([
@@ -108,7 +108,7 @@ app.layout = dbc.Container([
         dbc.Col([
             dcc.Graph(id='scatter_map_plot', figure=scatter_map_plot)
         ])
-    ], className='scatter_map_plot_row pb-3'),
+    ], className='scatter_map_plot_row pb-4'),
 
 
 ], className='container-fliud')
