@@ -11,6 +11,7 @@ import dash_bootstrap_components as dbc
 app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
                                                                            'content': 'width=device-width, initial-scale=1.0'}])
 app.title = 'Police Firearm Discharge - Data Visualization'
+server = app.server()
 
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
@@ -115,4 +116,4 @@ def render_state_plot(tab):
         return state_total_plot, scatter_map_total_plot
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()
