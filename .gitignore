@@ -4,3 +4,4 @@ backup.py
 Project.ipynb
 .ebextension
 Dash.zip
+./Dash/__pycache__
