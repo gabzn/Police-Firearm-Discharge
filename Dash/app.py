@@ -11,7 +11,6 @@ import dash_bootstrap_components as dbc
 app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
                                                                            'content': 'width=device-width, initial-scale=1.0'}])
 app.title = 'Police Firearm Discharge - Data Visualization'
-server = app.server()
 
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
