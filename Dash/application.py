@@ -30,13 +30,13 @@ weapon_plot.update_layout(bargap=0.2, title={'text': '<b> Most Common Weapons Fo
                                           yaxis={'linecolor':'black', 'linewidth':1, 'mirror': True},
                                           font={'family': 'Arial', 'size': 13})
         
-race_local_plot.update_layout(title={'text': '<b> Race Percentages Based on Our Dataset </b>', 
+race_local_plot.update_layout(title={'text': "<b> Victims' Race Percentages Based on Our Dataset </b>", 
                                           'y': 0.93, 'x': 0.45, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
                              font={'family': 'Arial', 'size': 13})
 
-race_global_plot.update_layout(title={'text': '<b> Race Percentages Based on Population of Each Race </b>', 
+race_global_plot.update_layout(title={'text': "<b> Victims' Race Percentages Based on Population of Each Race </b>", 
                                           'y': 0.93, 'x': 0.45, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
