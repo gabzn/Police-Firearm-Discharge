@@ -1,4 +1,0 @@
-pip install dash
-pip install plotly
-pip install dash-boostrap-components
-pip install pandas
