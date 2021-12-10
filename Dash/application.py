@@ -46,7 +46,7 @@ state_percentage_plot.update_layout(bargap=0.2, title={'text': '<b> Shootings pe
                                           'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending','visible': False},
+                                          xaxis={'categoryorder':'total descending','visible': True},
                                           font={'family': 'Arial', 'size': 13}, 
                                           margin=dict(b=0))           
 
@@ -54,7 +54,7 @@ state_total_plot.update_layout(bargap=0.2, title={'text': '<b> Total Shootings i
                                           'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending','visible': False},
+                                          xaxis={'categoryorder':'total descending','visible': True},
                                           font={'family': 'Arial', 'size': 13},
                                           margin=dict(b=0))     
 
