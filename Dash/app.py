@@ -18,14 +18,16 @@ age_plot.update_layout(bargap=0.2,
                               'xanchor': 'center', 'yanchor': 'top'},
                        xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=120, step=5), 
                               'ticktext':np.arange(start=0, stop=100, step=5),
-                              'title': 'Age'},
-                       yaxis={'title': 'Count'},
+                              'title': 'Age', 'linecolor':'black', 'linewidth':1, 'mirror': True},
+                       yaxis={'title': 'Count','linecolor':'black', 'linewidth':1, 'mirror': True},
                        font={'family': 'Arial', 'size': 13},
                        )
 
 weapon_plot.update_layout(bargap=0.2, title={'text': '<b> Most Common Weapons Found </b>', 'y': 0.92, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending'},
+                                          xaxis={'categoryorder':'total descending', 'mirror':True,
+                                                 'linecolor':'black', 'linewidth':1},
+                                          yaxis={'linecolor':'black', 'linewidth':1, 'mirror': True},
                                           font={'family': 'Arial', 'size': 13})
         
 race_local_plot.update_layout(title={'text': '<b> Race Percentages Based on Our Dataset </b>', 
@@ -45,14 +47,19 @@ state_percentage_plot.update_layout(bargap=0.2, title={'text': '<b> Shootings pe
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
                                           xaxis={'categoryorder':'total descending','visible': False},
-                                          font={'family': 'Arial', 'size': 13})           
+                                          font={'family': 'Arial', 'size': 13}, 
+                                          margin=dict(b=0))           
 
 state_total_plot.update_layout(bargap=0.2, title={'text': '<b> Total Shootings in Each State </b>', 
                                           'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
                                           xaxis={'categoryorder':'total descending','visible': False},
-                                          font={'family': 'Arial', 'size': 13})     
+                                          font={'family': 'Arial', 'size': 13},
+                                          margin=dict(b=0))     
+
+scatter_map_ratio_plot.update_layout(margin=dict(b=50))
+scatter_map_total_plot.update_layout(margin=dict(b=50))
 
 # Layout starts here
 app.layout = dbc.Container([
