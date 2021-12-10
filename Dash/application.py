@@ -8,9 +8,9 @@ from map_plot import scatter_map_ratio_plot, scatter_map_total_plot
 import numpy as np
 import dash_bootstrap_components as dbc
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
+application = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
                                                                            'content': 'width=device-width, initial-scale=1.0'}])
-app.title = 'Police Firearm Discharge - Data Visualization'
+application.title = 'Police Firearm Discharge - Data Visualization'
 
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
@@ -62,7 +62,7 @@ scatter_map_ratio_plot.update_layout(margin=dict(b=50))
 scatter_map_total_plot.update_layout(margin=dict(b=50))
 
 # Layout starts here
-app.layout = dbc.Container([
+application.layout = dbc.Container([
 
     dbc.Row(dbc.Col(html.H1('Police Firearm Discharge', className='text-center text-white')), class_name='pb-2'),
     
@@ -105,7 +105,7 @@ app.layout = dbc.Container([
 
 ], className='container-fliud')
 
-@app.callback([Output('state_plot', 'figure'),
+@application.callback([Output('state_plot', 'figure'),
                Output('scatter_map_ratio_plot', 'figure')],
                Input('state_plots', 'value'))
 def render_state_plot(tab):
@@ -115,4 +115,4 @@ def render_state_plot(tab):
         return state_total_plot, scatter_map_total_plot
 
 if __name__ == '__main__':
-    app.run_server()
+    application.run_server()
