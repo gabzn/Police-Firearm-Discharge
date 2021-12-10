@@ -4,20 +4,13 @@ from age_range import age_plot
 from state import state_percentage_plot, state_total_plot
 from race_pies import race_local_plot, race_global_plot
 from weapon import weapon_plot
-from map_plot import scatter_map_plot
-import plotly.express as px
-import pandas as pd
+from map_plot import scatter_map_ratio_plot, scatter_map_total_plot
 import numpy as np
 import dash_bootstrap_components as dbc
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
                                                                            'content': 'width=device-width, initial-scale=1.0'}])
 app.title = 'Police Firearm Discharge - Data Visualization'
-
-# Read in all the dataframes
-df_police = pd.read_csv('../Datasets/police.csv')
-df_population = pd.read_csv('../Datasets/population.csv')
-df_race = pd.read_csv('../Datasets/race.csv')
 
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
@@ -26,41 +19,47 @@ age_plot.update_layout(bargap=0.2,
                        xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=120, step=5), 
                               'ticktext':np.arange(start=0, stop=100, step=5),
                               'title': 'Age'},
-                       yaxis={'title': 'Count'})
+                       yaxis={'title': 'Count'},
+                       font={'family': 'Arial', 'size': 13})
 
 weapon_plot.update_layout(bargap=0.2, title={'text': 'Most Common Weapons Found', 'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending'})
+                                          xaxis={'categoryorder':'total descending'},
+                                          font={'family': 'Arial', 'size': 13})
+        
+race_local_plot.update_layout(title={'text': 'Race Percentages Based on Our Dataset', 
+                                          'y': 0.93, 'x': 0.45, 
+                                          'xanchor': 'center', 
+                                          'yanchor': 'top'},
+                             font={'family': 'Arial', 'size': 13})
 
-state_percentage_plot.update_layout(bargap=0.2, title={'text': 'Shootings in every 10,000 Population in Each State', 
+race_global_plot.update_layout(title={'text': 'Race Percentages Based on Population of Each Race', 
+                                          'y': 0.93, 'x': 0.45, 
+                                          'xanchor': 'center', 
+                                          'yanchor': 'top'},
+                                          font={'family': 'Arial', 'size': 13}) 
+
+state_percentage_plot.update_layout(bargap=0.2, title={'text': 'Shootings per 10,000 Population in Each State', 
                                           'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending'})           
+                                          xaxis={'categoryorder':'total descending'},
+                                          font={'family': 'Arial', 'size': 13})           
 
 state_total_plot.update_layout(bargap=0.2, title={'text': 'Total Shootings in Each State', 
                                           'y': 0.9, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending'})             
+                                          xaxis={'categoryorder':'total descending'},
+                                          font={'family': 'Arial', 'size': 13})     
 
-race_local_plot.update_layout(title={'text': 'Race Percentages Based on 9000+ Victims', 
-                                          'y': 0.9, 'x': 0.5, 
-                                          'xanchor': 'center', 
-                                          'yanchor': 'top'},)
-
-race_global_plot.update_layout(title={'text': 'Race Percentages Based on Population of Each Race', 
-                                          'y': 0.9, 'x': 0.5, 
-                                          'xanchor': 'center', 
-                                          'yanchor': 'top'}) 
-
+# scatter_map_ratio_plot.update_layout()
+# scatter_map_total_plot.update_layout()
 
 # Layout starts here
 app.layout = dbc.Container([
 
-    dbc.Row(
-        dbc.Col(html.H1('Police Firearm Discharge', className='text-center text-white'))
-    ),
+    dbc.Row(dbc.Col(html.H1('Police Firearm Discharge', className='text-center text-white')), class_name='pb-2'),
     
     dbc.Row([
         dbc.Col([
@@ -91,45 +90,24 @@ app.layout = dbc.Container([
 
             dcc.Graph(id='state_plot', figure={})
         ]),
-    ], className='state_tabs_row pb-4'),
-
-    # dbc.Row([
-    #     dbc.Col([
-    #         dcc.Tabs(id="race_pie_plots", value='View Race Percentages in Our Dataset', children=[
-    #             dcc.Tab(label='View Race Percentages in Our Dataset', value='View Race Percentages in Our Dataset'),
-    #             dcc.Tab(label='View Race Percentages in The Total Population', value='View Race Percentages in The Total Population'),
-    #         ]),
-
-    #         dcc.Graph(id='race_pie_plot', figure={})
-    #     ]),
-    # ], className='race_tabs_row pb-3'),
+    ], className='state_tabs_row'),
 
     dbc.Row([
         dbc.Col([
-            dcc.Graph(id='scatter_map_plot', figure=scatter_map_plot)
+            dcc.Graph(id='scatter_map_ratio_plot', figure={})
         ])
-    ], className='scatter_map_plot_row pb-4'),
-
+    ], className='scatter_map_ratio_plot_row pb-4'),
 
 ], className='container-fliud')
 
-@app.callback(Output('state_plot', 'figure'),
+@app.callback([Output('state_plot', 'figure'),
+               Output('scatter_map_ratio_plot', 'figure')],
               Input('state_plots', 'value'))
 def render_state_plot(tab):
     if tab == 'View Percentages in Each State':
-        return state_percentage_plot
+        return state_percentage_plot, scatter_map_ratio_plot
     elif tab == 'View Total in Each State':
-        return state_total_plot
-
-
-# @app.callback(Output('race_pie_plot', 'figure'),
-#               Input('race_pie_plots', 'value'))
-# def render_state_plot(tab):
-#     if tab == 'View Race Percentages in Our Dataset':
-#         return race_local_plot
-#     elif tab == 'View Race Percentages in The Total Population':
-#         return race_global_plot
-
+        return state_total_plot, scatter_map_total_plot
 
 if __name__ == '__main__':
     app.run_server(debug=True)
