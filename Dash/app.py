@@ -14,47 +14,45 @@ app.title = 'Police Firearm Discharge - Data Visualization'
 
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
-                       title={'text': 'Age Ranges', 'y': 0.9, 'x': 0.5, 
+                       title={'text': '<b> Age Ranges </b>', 'y': 0.92, 'x': 0.5, 
                               'xanchor': 'center', 'yanchor': 'top'},
                        xaxis={'tickmode':'array', 'tickvals':np.arange(start=0, stop=120, step=5), 
                               'ticktext':np.arange(start=0, stop=100, step=5),
                               'title': 'Age'},
                        yaxis={'title': 'Count'},
-                       font={'family': 'Arial', 'size': 13})
+                       font={'family': 'Arial', 'size': 13},
+                       )
 
-weapon_plot.update_layout(bargap=0.2, title={'text': 'Most Common Weapons Found', 'y': 0.9, 'x': 0.5, 
+weapon_plot.update_layout(bargap=0.2, title={'text': '<b> Most Common Weapons Found </b>', 'y': 0.92, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'},
                                           xaxis={'categoryorder':'total descending'},
                                           font={'family': 'Arial', 'size': 13})
         
-race_local_plot.update_layout(title={'text': 'Race Percentages Based on Our Dataset', 
+race_local_plot.update_layout(title={'text': '<b> Race Percentages Based on Our Dataset </b>', 
                                           'y': 0.93, 'x': 0.45, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
                              font={'family': 'Arial', 'size': 13})
 
-race_global_plot.update_layout(title={'text': 'Race Percentages Based on Population of Each Race', 
+race_global_plot.update_layout(title={'text': '<b> Race Percentages Based on Population of Each Race </b>', 
                                           'y': 0.93, 'x': 0.45, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
                                           font={'family': 'Arial', 'size': 13}) 
 
-state_percentage_plot.update_layout(bargap=0.2, title={'text': 'Shootings per 10,000 Population in Each State', 
-                                          'y': 0.9, 'x': 0.5, 
+state_percentage_plot.update_layout(bargap=0.2, title={'text': '<b> Shootings per 10,000 Population in Each State </b>', 
+                                          'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending'},
+                                          xaxis={'categoryorder':'total descending','visible': False},
                                           font={'family': 'Arial', 'size': 13})           
 
-state_total_plot.update_layout(bargap=0.2, title={'text': 'Total Shootings in Each State', 
-                                          'y': 0.9, 'x': 0.5, 
+state_total_plot.update_layout(bargap=0.2, title={'text': '<b> Total Shootings in Each State </b>', 
+                                          'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending'},
+                                          xaxis={'categoryorder':'total descending','visible': False},
                                           font={'family': 'Arial', 'size': 13})     
-
-# scatter_map_ratio_plot.update_layout()
-# scatter_map_total_plot.update_layout()
 
 # Layout starts here
 app.layout = dbc.Container([
@@ -94,7 +92,7 @@ app.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col([
-            dcc.Graph(id='scatter_map_ratio_plot', figure={})
+            dcc.Graph(id='scatter_map_ratio_plot', figure={}, className='pb-10. mb-20')
         ])
     ], className='scatter_map_ratio_plot_row pb-4'),
 
@@ -102,7 +100,7 @@ app.layout = dbc.Container([
 
 @app.callback([Output('state_plot', 'figure'),
                Output('scatter_map_ratio_plot', 'figure')],
-              Input('state_plots', 'value'))
+               Input('state_plots', 'value'))
 def render_state_plot(tab):
     if tab == 'View Percentages in Each State':
         return state_percentage_plot, scatter_map_ratio_plot
