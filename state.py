@@ -25,7 +25,7 @@ df_percentage = pd.DataFrame.from_dict(percentage_dict)
 
 state_percentage_plot = px.bar(data_frame=df_percentage, x='state', y='percentage',
                         labels={'state': 'State', 'percentage':'Number of Shootings per 10,000 Pop'},
-                        color_discrete_sequence=px.colors.qualitative.Bold,
+                        # color_discrete_sequence=px.colors.qualitative.Bold,
                         hover_name='state_name')
 
 
@@ -36,5 +36,5 @@ df_state.rename(columns={'index': 'state', 'state': 'num_of_shootings'}, inplace
 
 state_total_plot = px.bar(data_frame=df_state, x='state', y='num_of_shootings',
                           labels={'state': 'State', 'num_of_shootings': 'Number of Shootings'},
-                          color_discrete_sequence=px.colors.qualitative.Bold,
+                        #   color_discrete_sequence=px.colors.qualitative.Bold,
                           hover_name='state')
