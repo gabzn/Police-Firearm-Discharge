@@ -116,5 +116,5 @@ def render_state_plot(tab):
     elif tab == 'View Total in Each State':
         return state_total_plot, scatter_map_total_plot
 
-# if __name__ == '__main__':
-#     application.run_server()
+if __name__ == '__main__':
+    application.run_server()
