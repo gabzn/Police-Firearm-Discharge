@@ -2,9 +2,9 @@ import plotly.express as px
 import pandas as pd
 from state import df_state, df_percentage
 
-df_police = pd.read_csv('../Datasets/police.csv')
-df_population = pd.read_csv('../Datasets/population.csv')
-df_race = pd.read_csv('../Datasets/race.csv')
+df_police = pd.read_csv('./Datasets/police.csv')
+df_population = pd.read_csv('./Datasets/population.csv')
+df_race = pd.read_csv('./Datasets/race.csv')
 
 df_shootings = df_population.copy()
 df_shootings['total_shootings'] = 0

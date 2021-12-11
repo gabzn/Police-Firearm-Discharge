@@ -1,8 +1,8 @@
 import plotly.express as px
 import pandas as pd
 
-df_police = pd.read_csv('../Datasets/police.csv')
-df_race = pd.read_csv('../Datasets/race.csv')
+df_police = pd.read_csv('./Datasets/police.csv')
+df_race = pd.read_csv('./Datasets/race.csv')
 
 df_race_percentage_local = round((df_police['race'].value_counts().sort_values() / 9096) * 100, 2)
 df_race_percentage_local = df_race_percentage_local.reset_index()

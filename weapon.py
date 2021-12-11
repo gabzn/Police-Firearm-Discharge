@@ -1,7 +1,7 @@
 import plotly.express as px
 import pandas as pd
 
-df_police = pd.read_csv('../Datasets/police.csv')
+df_police = pd.read_csv('./Datasets/police.csv')
 
 # Find the total number of unarmed people and people who carried non-lethal weapon.
 

@@ -1,8 +1,8 @@
 import plotly.express as px
 import pandas as pd
 
-df_police = pd.read_csv('../Datasets/police.csv')
-df_population = pd.read_csv('../Datasets/population.csv')
+df_police = pd.read_csv('./Datasets/police.csv')
+df_population = pd.read_csv('./Datasets/population.csv')
 
 
 # Include the total number of population in that state.
