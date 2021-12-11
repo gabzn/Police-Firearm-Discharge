@@ -5,4 +5,4 @@ Data Visualization Project for Police Firearm Discharge
 https://police-firearm-discharge.herokuapp.com/
 
 # Developer
-Gabriel Zhen
+Gabriel
