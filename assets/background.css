@@ -8,3 +8,7 @@ body {
 #react-entry-point > div > div.pb-2.row > div > h1 {
     background-color: rgba(51, 51, 59, 0.397);
 }
+
+#_dash-app-content > div > div.pb-2.row > div > h1 {
+    background-color: rgba(51, 51, 59, 0.397);
+}

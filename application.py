@@ -22,8 +22,7 @@ age_plot.update_layout(bargap=0.2,
                               'ticktext':np.arange(start=0, stop=100, step=5),
                               'title': 'Age', 'linecolor':'black', 'linewidth':1, 'mirror': True},
                        yaxis={'title': 'Count','linecolor':'black', 'linewidth':1, 'mirror': True},
-                       font={'family': 'Arial', 'size': 13},
-                       )
+                       font={'family': 'Arial', 'size': 13})
 
 weapon_plot.update_layout(bargap=0.2, title={'text': '<b> Most Common Weapons Found </b>', 'y': 0.92, 'x': 0.5, 
                                           'xanchor': 'center', 'yanchor': 'top'},
@@ -48,7 +47,7 @@ state_percentage_plot.update_layout(bargap=0.2, title={'text': '<b> Shootings pe
                                           'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending','visible': True},
+                                          xaxis={'categoryorder':'total descending','visible': True, 'title':''},
                                           font={'family': 'Arial', 'size': 13}, 
                                           margin=dict(b=0))           
 
@@ -56,7 +55,7 @@ state_total_plot.update_layout(bargap=0.2, title={'text': '<b> Total Shootings i
                                           'y': 0.95, 'x': 0.5, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          xaxis={'categoryorder':'total descending','visible': True},
+                                          xaxis={'categoryorder':'total descending','visible': True, 'title':''},
                                           font={'family': 'Arial', 'size': 13},
                                           margin=dict(b=0))     
 
@@ -117,4 +116,5 @@ def render_state_plot(tab):
         return state_total_plot, scatter_map_total_plot
 
 if __name__ == '__main__':
+    # application.run_server(debug=True)
     application.run_server()

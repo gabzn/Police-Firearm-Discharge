@@ -22,11 +22,13 @@ scatter_map_ratio_plot = px.scatter_mapbox(df_shootings,
                                      hover_data={'lat': False, 'long': False, 'population': True},
                                      labels={'percentage': 'Shootings per 10000',
                                              'population': 'Population'},
-                                     mapbox_style='carto-positron',
+                                     mapbox_style='open-street-map',
                                      center={'lat':39.048191, 'lon':-95.677956},
                                      zoom=3,
                                      size='percentage',
-                                     )
+                                     color='percentage',
+                                     color_continuous_scale='portland',
+                                     opacity=0.9)
 
 scatter_map_total_plot = px.scatter_mapbox(df_shootings, 
                                      lat='lat', 
@@ -35,13 +37,10 @@ scatter_map_total_plot = px.scatter_mapbox(df_shootings,
                                      hover_data={'lat': False, 'long': False, 'population': True},
                                      labels={'total_shootings': 'Total Shootings',
                                              'population': 'Population'},
-                                     mapbox_style='carto-positron',
+                                     mapbox_style='open-street-map',
                                      center={'lat':39.048191, 'lon':-95.677956},
                                      zoom=3,
                                      size='total_shootings',
-                                     )                                     
-
-
-
-# I want the total shootings in each state
-# I want the shootings per 100k in each state
+                                     color='total_shootings',
+                                     color_continuous_scale='portland',
+                                     opacity=0.9)                                     

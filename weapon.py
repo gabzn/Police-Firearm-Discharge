@@ -3,7 +3,6 @@ import pandas as pd
 
 df_police = pd.read_csv('./Datasets/police.csv')
 
-# Find the total number of unarmed people and people who carried non-lethal weapon.
 
 weapon_dict = {
     'weapon':['Gun', 'Knife', 'Toy gun', 'Baseball Bat', 'Hammer', 'Ax', 'Crossbow'],

@@ -8,6 +8,5 @@ df_race = pd.read_csv('./Datasets/race.csv')
 
 age_plot = px.histogram(data_frame=df_police, 
                         x='age', 
-                        nbins=40
-                        )
+                        nbins=40)
 
