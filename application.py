@@ -36,13 +36,15 @@ race_local_plot.update_layout(title={'text': "<b> Victims' Race Percentages Base
                                           'y': 0.93, 'x': 0.45, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                             font={'family': 'Arial', 'size': 13})
+                             font={'family': 'Arial', 'size': 13},
+                             margin=dict(b=20))
 
 race_global_plot.update_layout(title={'text': "<b> Victims' Race Percentages Based on Population of Each Race </b>", 
                                           'y': 0.93, 'x': 0.45, 
                                           'xanchor': 'center', 
                                           'yanchor': 'top'},
-                                          font={'family': 'Arial', 'size': 13}) 
+                                          font={'family': 'Arial', 'size': 13},
+                                          margin=dict(b=20)) 
 
 state_percentage_plot.update_layout(bargap=0.2, title={'text': '<b> Shootings per 10,000 Population in Each State </b>', 
                                           'y': 0.95, 'x': 0.5, 
@@ -60,8 +62,8 @@ state_total_plot.update_layout(bargap=0.2, title={'text': '<b> Total Shootings i
                                           font={'family': 'Arial', 'size': 13},
                                           margin=dict(b=0))     
 
-scatter_map_ratio_plot.update_layout(margin=dict(b=50))
-scatter_map_total_plot.update_layout(margin=dict(b=50))
+scatter_map_ratio_plot.update_layout(margin=dict(b=30, t=10))
+scatter_map_total_plot.update_layout(margin=dict(b=30, t=10))
 
 # Layout starts here
 application.layout = dbc.Container([
@@ -136,5 +138,5 @@ def render_zipcode_map(state):
 
 
 if __name__ == '__main__':
-    # application.run_server(debug=True)
-    application.run_server()
+    application.run_server(debug=True)
+    # application.run_server()

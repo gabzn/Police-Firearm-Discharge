@@ -61,7 +61,15 @@ def create_map_plot(state):
                                       opacity=0.7,
                                       size='count',
                                       color='count',
-                                      color_continuous_scale='portland')
+                                      color_continuous_scale='portland',
+                                      height=600)
+
+    zipcode_map_plot.update_layout(title={'text': "<b> Shootings in Each City of The Selected State </b>", 
+                                          'y': 0.95, 'x': 0.5, 
+                                          'xanchor': 'center', 
+                                          'yanchor': 'top'},
+                                          font={'family': 'Arial', 'size': 13},
+                                          margin=dict(b=30)) 
     return zipcode_map_plot
 
 
