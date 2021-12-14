@@ -28,7 +28,7 @@ scatter_map_ratio_plot = px.scatter_mapbox(df_shootings,
                                      size='percentage',
                                      color='percentage',
                                      color_continuous_scale='portland',
-                                     opacity=0.9)
+                                     opacity=0.8)
 
 scatter_map_total_plot = px.scatter_mapbox(df_shootings, 
                                      lat='lat', 
@@ -43,4 +43,7 @@ scatter_map_total_plot = px.scatter_mapbox(df_shootings,
                                      size='total_shootings',
                                      color='total_shootings',
                                      color_continuous_scale='portland',
-                                     opacity=0.9)                                     
+                                     opacity=0.8)        
+
+
+                             

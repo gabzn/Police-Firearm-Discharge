@@ -5,6 +5,7 @@ from state import state_percentage_plot, state_total_plot
 from race_pies import race_local_plot, race_global_plot
 from weapon import weapon_plot
 from map_plot import scatter_map_ratio_plot, scatter_map_total_plot
+from zipcode import state_options, create_map_plot
 import numpy as np
 import dash_bootstrap_components as dbc
 
@@ -104,6 +105,18 @@ application.layout = dbc.Container([
         ])
     ], className='scatter_map_ratio_plot_row pb-4'),
 
+    dbc.Row([
+        dbc.Col([
+            dcc.Dropdown(
+                id='state_dropdown',
+                options=state_options,
+                placeholder='Select a state...',
+                value='NY'
+            ),
+            dcc.Graph(id='zipcode_map_plot',figure={}), 
+        ])
+    ], class_name='zipcode_map_row pb-4')
+
 ], className='container-fliud')
 
 @application.callback([Output('state_plot', 'figure'),
@@ -114,6 +127,13 @@ def render_state_plot(tab):
         return state_percentage_plot, scatter_map_ratio_plot
     elif tab == 'View Total in Each State':
         return state_total_plot, scatter_map_total_plot
+
+@application.callback(Output('zipcode_map_plot', 'figure'),
+                      Input('state_dropdown', 'value'))
+def render_zipcode_map(state):
+    return create_map_plot(state)
+
+
 
 if __name__ == '__main__':
     # application.run_server(debug=True)
