@@ -5,7 +5,7 @@ df_police = pd.read_csv('./Datasets/police.csv')
 
 
 weapon_dict = {
-    'weapon':['Gun', 'Knife', 'Toy gun', 'Baseball Bat', 'Hammer', 'Ax', 'Crossbow'],
+    'weapon':['Gun', 'Knife', 'Toy Gun', 'Baseball Bat', 'Hammer', 'Ax', 'Crossbow'],
     'count': [4847, 1193, 268, 431, 604, 242, 101]
 }
 
