@@ -12,8 +12,8 @@ import dash_bootstrap_components as dbc
 application = Dash(__name__, external_stylesheets=[dbc.themes.FLATLY], meta_tags=[{'name': 'viewport',
                    'content': 'width=device-width, initial-scale=1.0'}])
 application.title = 'Police Firearm Discharge - Data Visualization'
+application.config.suppress_callback_exceptions = True
 server = application.server
-
 
 # Create layouts for graphs
 age_plot.update_layout(bargap=0.2, 
@@ -59,9 +59,22 @@ scatter_map_total_plot.update_layout(margin=dict(b=30, t=10))
 
 # Layout starts here
 application.layout = dbc.Container([
-
-    dbc.Row(dbc.Col(html.H1('Police Firearm Discharge', className='text-center text-white')), class_name='pb-2'),
     
+    dbc.NavbarSimple(
+        children=[dbc.NavItem(dbc.NavLink("Motivation & About", href="/about")),],
+        brand="Police Firearm Discharge",
+        brand_href="/",
+        className='NavBar'
+    ),
+
+    dcc.Location(id='url', refresh=False, pathname='/'),
+    
+    dbc.Container(id='main_container')
+
+], className='container-fliud')
+
+main_page_layout = dbc.Container([
+        
     dbc.Row([
         dbc.Col(dcc.Graph(id='age_plot',figure=age_plot),width={'size':'6'}),
         dbc.Col(dcc.Graph(id='weapon_plot', figure=weapon_plot), width={'size':'6'})
@@ -77,9 +90,9 @@ application.layout = dbc.Container([
             dcc.Tabs(id="state_plots", value='View Percentages in Each State', children=[
                 dcc.Tab(label='View Percentages in Each State', value='View Percentages in Each State'),
                 dcc.Tab(label='View Total in Each State', value='View Total in Each State')
-            ]),
+        ]),
 
-            dcc.Graph(id='state_plot', figure={})]), 
+        dcc.Graph(id='state_plot', figure={})]), 
     className='state_tabs_row'),
 
     dbc.Row(
@@ -88,15 +101,80 @@ application.layout = dbc.Container([
 
     dbc.Row([
         dbc.Col([
-            dcc.Dropdown(
-                id='state_dropdown',
-                options=state_options,
-                placeholder='Select a state...',
-                value='NY'),
+            dcc.Dropdown(id='state_dropdown',options=state_options,placeholder='Select a state...',value='NY'),
             dcc.Graph(id='zipcode_map_plot',figure={})])], 
     class_name='zipcode_map_row pb-4')
 
-], className='container-fliud')
+], className='main_container')
+
+about_page_layout = dbc.Container([
+    
+    dbc.Container(
+        dbc.Row(
+            dbc.Col([
+                html.H3(html.U('Motivation Behind This Project'), className='text-center pt-3 pb-2'),
+                html.H4("Police Shootings have been a very controversial topic in recent years. Every now and then we are witnessing police shootings across the United States, especially for the last few years. We have lost thousands of people’s lives in police altercation, and some victims were shot or killed with no valid reasons."),
+                html.H4("We decided to name our project Police Firearm Discharge, and the project is inspired by the police altercations that happened with George Floyd back in 2020. Our goal and motivation behind this project is to raise awareness of police abuse of power.", 
+                        className='mb-3 '),
+            ], width={'size': '12'}),
+        ),
+    className='motivation_container'),
+
+    dbc.Container(
+        dbc.Row(
+            dbc.Col([
+                html.H3(html.U("Some Questions We'd Like to Answer in This Project"), className='text-center pt-3 pb-2'),
+                html.Ol([
+                    html.Li('What age range gets shot the most?'),
+                    html.Li('What are some lethal weapons that police found?'),
+                    html.Li('What are the percentages of each race getting shot?'),
+                    html.Li('Which state has the highest level of police shootings per 10,000 population?')
+                ], className='questions_list')
+            ], width={'size': '12'})
+        ),
+    className='questions_container'),
+
+    dbc.Container(
+        dbc.Row([
+            dbc.Col(
+                html.H3(html.U("Datasets Used in This Project"), className='text-center pt-3 pb-2'),
+            width={'size': '12'}),
+
+            dbc.Col([
+                html.H4('U.S Police Shootings 2013 - 2020'),
+                html.H5(html.A('Source Can Be Found Here', href='https://www.kaggle.com/jamesvandenberg/us-police-shootings-20132020')),
+                html.H5("Features include: victim's age, gender, race, state, city, alleged weapon and criminal charges.")
+            ], width={'size': '4'}, className='police_dataset'),
+            
+            dbc.Col([
+                html.H4('Census US Population by State'),
+                html.H5(html.A('Source Can Be Found Here', href='https://www.kaggle.com/peretzcohen/2019-census-us-population-data-by-state')),
+                html.H5("Features include: population in each state, states' latitude and longtitude.")
+            ], width={'size': '4'}, className='population_dataset'),
+            
+            dbc.Col([
+                html.H4('U.S. Census Bureau Race Origin 2020'),
+                html.H5(html.A('Source Can Be Found Here', href='https://www.census.gov/quickfacts/fact/table/US/POP010220')),
+                html.H5("Features include: percentage of each race in the US.")
+            ], width={'size': '4'}, className='race_dataset')
+        ]),
+    className='datasets_container'),
+
+    dbc.Container(
+        dbc.Row([
+            html.H3(html.U('Where to Find Me'), className='text-center pt-3 pb-2'),    
+            
+            dbc.Col(
+                html.H4(html.A('GitHub', href='https://github.com/gabzn'), className='text-center')
+            , width={'size': '6'}),
+
+            dbc.Col(
+                html.H4(html.A('LinkedIn', href='http://www.linkedin.com/in/gabrielzhen'), className='text-center')
+            , width={'size': '6'})
+        ]),
+    className='dev_container'),
+
+], className='about_container')
 
 @application.callback([Output('state_plot', 'figure'),
                Output('scatter_map_ratio_plot', 'figure')],
@@ -107,11 +185,23 @@ def render_state_plot(tab):
     elif tab == 'View Total in Each State':
         return state_total_plot, scatter_map_total_plot
 
+
 @application.callback(Output('zipcode_map_plot', 'figure'),
-                      Input('state_dropdown', 'value'))
+                      Input('state_dropdown', 'value'),)
 def render_zipcode_map(state):
     return create_map_plot(state)
 
+
+@application.callback(Output('main_container', 'children'),
+                      Input('url', 'pathname'))
+def render_path(pathname):
+    if pathname == '/':
+        return main_page_layout
+    elif pathname == '/about':
+        return about_page_layout
+    else:
+        return main_page_layout
+    
 if __name__ == '__main__':
     # application.run_server(debug=True)
     application.run_server()

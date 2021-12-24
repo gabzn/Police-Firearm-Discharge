@@ -5,14 +5,102 @@ body {
     font-family: 'Source Sans 3', sans-serif;
 } 
 
-#react-entry-point > div > div.pb-2.row > div > h1 {
-    background-color: rgba(51, 51, 59, 0.397);
+#_dash-app-content > div > nav {
+    background-color: rgba(4, 4, 5, 0.397) !important;
+    padding: 0;
+    margin-bottom: 10px;
 }
 
-#_dash-app-content > div > div.pb-2.row > div > h1 {
-    background-color: rgba(51, 51, 59, 0.397);
+#react-entry-point > div > nav {
+    background-color: rgba(4, 4, 5, 0.397) !important;
+    padding: 0;
+    margin-bottom: 10px;
 }
 
-/* #state_dropdown {
-    text-align: center;
-} */
+#_dash-app-content > div > nav > div {
+    box-sizing: border-box;
+    border: 3px rgba(15, 15, 15, 0.397) solid;
+}
+
+#react-entry-point > div > nav > div {
+    box-sizing: border-box;
+    border: 3px rgba(15, 15, 15, 0.397) solid;
+}
+
+#_dash-app-content > div > nav > div > a {
+    font-size: 2.2rem;
+    color: white;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+#react-entry-point > div > nav > div > a {
+    font-size: 2.2rem;
+    color: white;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+#_dash-app-content > div > nav > div > a:hover {
+    color:rgb(37, 110, 228);
+}
+
+#react-entry-point > div > nav > div > a:hover {
+    color:rgb(37, 110, 228);
+}
+
+#_dash-app-content > div > nav > div > div > div > div > a {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: white;
+}
+
+#react-entry-point > div > nav > div > div > div > div > a {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: white;
+}
+
+#_dash-app-content > div > nav > div > div > div > div > a:hover {
+    color:rgb(37, 110, 228);
+}
+
+#react-entry-point > div > nav > div > div > div > div > a:hover {
+    color:rgb(37, 110, 228);
+}
+
+.motivation_container {
+    box-sizing: border-box;
+    border: 3px rgba(15, 15, 15, 0.397) solid;
+    background-color: rgba(39, 36, 23, 0.376);
+    color: rgb(251, 250, 250);
+    margin-bottom: 1em;
+}
+
+.questions_container {
+    box-sizing: border-box;
+    border: 3px rgba(15, 15, 15, 0.397) solid;
+    background-color: rgba(39, 36, 23, 0.376);
+    color: rgb(251, 250, 250);
+    margin-bottom: 1em;
+}
+
+.questions_list {
+    font-size: 1.5em;
+}
+
+.datasets_container {
+    box-sizing: border-box;
+    border: 3px rgba(15, 15, 15, 0.397) solid;
+    background-color: rgba(39, 36, 23, 0.376);
+    color: rgb(251, 250, 250);
+    margin-bottom: 1em;
+}
+
+.dev_container {
+    box-sizing: border-box;
+    border: 3px rgba(15, 15, 15, 0.397) solid;
+    background-color: rgba(39, 36, 23, 0.376);
+    color: rgb(251, 250, 250);
+    margin-bottom: 1em;
+}
