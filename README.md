@@ -7,7 +7,7 @@ We decided to name our project Police Firearm Discharge, and the project is insp
 
 
 # Website Link
-http://policefirearmdischarge-env.eba-fp8kzckp.us-east-1.elasticbeanstalk.com/
+http://policefirearmdischarge.com/
 
 # Developer
 Gabriel Zhen (Me)
