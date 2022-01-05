@@ -6,8 +6,8 @@ Police Shootings have been a very controversial topic in recent years. Every now
 We decided to name our project Police Firearm Discharge, and the project is inspired by the police altercations that happened with George Floyd back in 2020. Our goal and motivation behind this project is to raise awareness of police abuse of power.
 
 
-# Website Link
+## Website Link
 https://policefirearmdischarge.com/
 
-# Developer
+## Developer
 Gabriel Zhen (Me)
